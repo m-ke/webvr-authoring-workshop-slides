@@ -1,0 +1,45 @@
+
+<html>
+  <head>
+    <script type="text/javascript" src="../src/vendor/js/aframe.min.js"></script>
+    <script type="text/javascript" src="../src/vendor/js/architectural-toolkit/3dio.js"></script>
+  </head>
+  <body>
+   <a-scene>
+    <a-sky color="skyblue"></a-sky>
+    <a-entity id="room" position="0 0 -4">
+      <a-entity io3d-wall="l:3" position="-1.5 0 -1.65">
+         <a-entity io3d-window="" position="1 0.8 0"></a-entity>
+       </a-entity>
+       <a-entity io3d-wall="l:3" position="1.5 0 1.5" rotation="0 90 0" frontHasBase="true"></a-entity>
+       <a-entity io3d-wall="l:3" position="-1.5 0 -1.5" rotation="0 -90 0">
+         <a-entity io3d-door="" position="1 0 0"></a-entity>
+       </a-entity>
+       <a-entity io3d-polyfloor></a-entity>
+     </a-entity>
+   </a-scene>
+
+   <script>
+      // set API key (you can get your own publishable key at 3d.io)
+      io3d.config({
+        publishableApiKey: 'be62f9e4-1d86-489f-8bf6-dbefe83dc9f7'
+      })
+
+      // get the scene and convert it to a format that works with 3d.io API
+      const roomEl = document.querySelector('#room')
+      let structure = io3d.scene.getSceneStructureFromAframeElements(roomEl)
+
+      // add furniture
+      io3d.staging.getFurnishings(structure.children, {label: 'dining'})
+      .then(result => {
+        console.log(result)
+        // convert the result to A-Frame components
+        let elements = io3d.scene.getAframeElementsFromSceneStructure(result)
+        elements.forEach(el => {
+          roomEl.appendChild(el)
+        })
+      })
+    </script>
+
+  </body>
+</html>

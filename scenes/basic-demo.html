@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A-Frame demo</title>
+    <script type="text/javascript" src="../src/vendor/js/aframe.min.js"></script>
+    <script type='text/javascript' src="../src/vendor/js/aframe-extras.ocean.min.js"></script>
+</head>
+<body>
+  <a-scene>
+      <a-box position="0 0 -3" rotation="0 0 0" color="blue"></a-box>
+      <a-sky color="skyblue"></a-sky>
+
+      <a-entity id="ocean" ocean="density: 20; width: 50; depth: 50; speed: 4"
+                material="color: #9CE3F9; opacity: 0.75; metalness: 0; roughness: 1"
+                rotation="-90 0 0"></a-entity>
+  </a-scene>
+</body>
+</html>
